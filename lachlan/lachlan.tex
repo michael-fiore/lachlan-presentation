@@ -1,0 +1,203 @@
+\documentclass{article}
+
+% Basic document packages.
+\usepackage{amsmath,amssymb,amsthm, amsopn}
+\usepackage[margin=1.5in]{geometry}
+
+% Font and spacing.
+\usepackage{mathpazo}
+\usepackage{setspace}
+\setstretch{1.25}
+
+% References. I liked the purple color.
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=purple
+}
+
+% Better arrows for vector notation.
+\usepackage{esvect}
+
+% Shortcuts for sets.
+\newcommand\N{\mathbb{N}}
+\newcommand\Z{\mathbb{Z}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\R{\mathbb{R}}
+\DeclareMathOperator{\Diag}{Diag}
+\DeclareMathOperator{\Diagel}{Diag_{el}}
+\DeclareMathOperator{\Th}{Th}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\RM}{RM}
+\let\mc\mathcal
+
+% Basic environments for theorems et al.
+\usepackage{thmtools}
+\declaretheoremstyle[bodyfont=\normalfont, notefont=\normalfont\itshape]{std}
+\declaretheorem[style=std]{proposition}
+\declaretheorem[style=std]{definition}
+\declaretheorem[style=std]{notation}
+\declaretheorem[style=std]{lemma}
+\declaretheorem[style=std]{theorem}
+\declaretheorem[style=std]{remark}
+\declaretheorem[style=std, numbered=no]{claim}
+
+% Enumeration settings.
+\usepackage{enumitem}
+\setlist[enumerate,1]{
+  label= (\upshape\roman*),
+  ref= (\upshape\roman*),
+  topsep= 1ex,
+  parsep= 0pt,
+}
+
+% Boxing text in case you like that.
+\usepackage[]{mdframed}
+\mdfsetup{linewidth=0.9pt}
+
+% Header for every page.
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\setlength{\headheight}{15pt}
+\renewcommand{\headrulewidth}{0.9pt}
+
+% I hate how paragraphs work in TeX by default.
+\usepackage{parskip}
+\setlength{\parindent}{15pt}
+
+\begin{document}
+
+\chead{\textbf{Michael Fiore, \'Alvaro Ramos}}
+
+\begin{notation}[Preliminaries] Let $\mc{L}$ be a countable language. We will also let $\mc{A}$ and $\mc{B}$ denote $\mc{L}$-structures with universes $A$ and $B$ respectively.
+    \begin{itemize}
+        \item Let $S$ be the set of all $\mc{L}$-formulas. Throughout this write-up, we will let $\Delta$ be a set of $\mc{L}$-formulas, so $\Delta \subseteq S$.
+        \item Let $S_n$ be the set of all $\mc{L}$-formulas with at most one free variable $x$.
+        \item For any set $X$, let $\mc{L}_X = \mc{L} \cup \{ c_x : x \in X \}$, where we augment $\mc{L}$ with constant symbols for every element of $X$.
+        \item Let $S(X)$ be the set of all $\mc{L}_X$ formulas.
+        \item Let $S_1(X)$ be defined similarly.
+        \item If $X \subseteq A$, we define $\Th(\mc{A}, X)$ to be the theory of $\mc{A}$ interpreted as an $\mc{L}_X$-structure. In particular, $\Th(\mc{A}, A)$ is the elementary diagram of $\mc{A}$.
+        \item An \textit{$\mc{A}$-instance} of a formula $\varphi$ is any formula obtained from $\varphi$ by substituting $c_a \in \mc{L}_A$ for each variable.
+    \end{itemize}
+\end{notation}
+
+\begin{definition}[Boolean closure]
+    Let $\Delta$ be a set of $\mc{L}$-formulas and let $X$ be a set. We define $\Delta^b(X)$ to be the set of formulas in $S_1(X)$ obtained from formulas in $\Delta$ using conjunction, disjunction, negation, and substituting instances of $c_x$ for a variable. Trivially, $S^b(A) = S(A)$.
+\end{definition}
+
+\begin{definition}[Partitioning]
+   Let $\varphi \in S_1(B)$ and $\Gamma = \{ \psi_1, \ldots, \psi_n \} \subset S_1(B)$. We say that $\Gamma$ \textit{partitions} $\varphi$ if we have the following.
+   \begin{alignat*}{3}
+        \mc{B} &\vDash \forall x (\psi_1(x) \lor \cdots \lor \psi_n(x) \lor \neg \varphi(x)) \\
+        \mc{B} &\vDash \forall x ((\psi_i(x) \land \psi_j(x)) \to \neg \varphi(x)) &\text{ for all } i \neq j \\
+        \mc{B} &\vDash \exists x (\varphi(x) \land \psi_i(x)) &\text{ for all } i
+   \end{alignat*}
+   In other words, whenever $\varphi(x)$ is true in $\mc{B}$, exactly one of the $\psi_i(x)$'s is true.
+\end{definition}
+
+\begin{definition}[Generalized rank and degree]
+    Let $\Delta \subseteq A$. In order to define a generalized version of Morley rank and degree, we will need to define two sets $S^{\alpha}(\mc{A}, \Delta)$ and $\Tr^{\alpha}(\mc{A}, \Delta)$ for any ordinal $\alpha$ inductively.
+    \begin{itemize}
+        \item Let $S^{0}(\mc{A}, \Delta) = \{ \varphi \in S_1(A) : \mc{A} \vDash \exists x \varphi(x) \}$, i.e. the set of all $\mc{L}$-formulas that have witnesses in $\mc{A}$.
+
+        \item If $S^{\alpha}(\mc{A}, \Delta)$ is already defined, we may define $\Tr^{\alpha}(\mc{A}, \Delta)$ as follows. Given a formula $\varphi$, we say that $\varphi \in \Tr^{\alpha}(\mc{A}, \Delta)$ if and only if there exists a finite $k$ such that for all $\mc{B} \succeq \mc{A}$ and any finite $\Gamma \subset \Delta^{b}(B)$ partitioning $\mc{A}$, there are no more than $k$ formulas $\psi$ in $\Gamma$ such that $(\varphi \land \psi) \in S^{\alpha}(\mc{A}, \Delta)$.
+        
+        \item Let $S^{\alpha+1}(\mc{A}, \Delta) = S^{\alpha}(\mc{A}, \Delta) \setminus \Tr^{\alpha}(\mc{A}, \Delta)$.
+
+        \item For $\alpha$ limit, let $S^{\alpha}(\mc{A}, \Delta) = \bigcap_{\beta < \alpha} S^{\beta}(\mc{A}, \Delta)$.
+
+        \item The \textit{$\Delta$-rank} of $\varphi$ in $\mc{A}$ is the least ordinal $\alpha$ such that $\varphi \in \Tr^{\alpha}(\mc{A}, \Delta)$.
+        
+        \item The \textit{$\Delta$-degree} of $\varphi$ in $\mc{A}$ is the least number $k$ witnessing that $\varphi \in \Tr^{\alpha}(\mc{A}, \Delta)$.
+    \end{itemize}
+\end{definition}
+
+\begin{proposition}[$\Delta$-rank generalizes Morley rank]\label{dRank}
+    Let $p$ be a 1-type in $\Th(\mc{A}, A)$. The Morley rank of $p$ is the least $p$ such that $p \cap \Tr^{\alpha}(\mc{A}, S) \neq \varnothing$. The Morley degree of $p$ is the minimum of the $S$-degrees of the formulas in $p \cap \Tr^{\alpha}(\mc{A}, S)$.
+\end{proposition}
+\begin{proof}
+\end{proof}
+
+\begin{definition}[Minimality]
+    A formula $\varphi$ is \textit{minimal} in $\Tr^{\alpha}(\mc{A}, \Delta)$ if $\varphi \in \Tr^{\alpha}(\mc{A}, \Delta)$ and there is no $\psi \in \Delta$ with some $\mc{A}$-instance $\psi^{\prime}$ such that $(\varphi \land \psi^{\prime})$ and $(\varphi \land \neg \psi^{\prime})$ are both in $\Tr^{\alpha}(\mc{A}, \Delta)$.
+\end{definition}
+
+\begin{lemma}[Properties of rank]\label{pRank}
+    Let $\varphi$, $\varphi_0$, $\varphi_1$, and $\psi$ be formulas in $S_1(A)$.
+    \begin{enumerate}
+        \item If $\varphi(\mc{A}) \subseteq \psi(\mc{A})$ and $\varphi \in S^{\alpha}(\mc{A}, \Delta)$, then $\psi \in S^{\alpha}(\mc{A}, \Delta)$.
+        \item Suppose $\mc{B} \succeq \mc{A}$. Then $\varphi \in S^{\alpha}(\mc{A}, \Delta)$ if and only if $\varphi \in S^{\alpha}(\mc{B}, \Delta)$.
+        \item If $(\varphi_0 \lor \varphi_1)(\mc{A}) \supseteq \varphi(\mc{A})$ and $\varphi \in S^{\alpha}(\mc{A}, \Delta)$, then one of $\varphi_0$ and $\varphi_1$ is in $S^{\alpha}(\mc{A}, \Delta)$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+\end{proof}
+
+\begin{definition}[Weak satisfiability]
+    First, for any set of formulas $\Theta$, we define
+    \[ \Theta^{-} = \{ \neg \phi : \phi \in \Theta \} \]
+    to be the set of negations of all formulas in $\Theta$. The set $\Gamma \subset S(A)$ is \textit{weakly satisfiable} in $\mc{A}$ if no finite disjunctions of formulas in $\Gamma^{-}$ is valid in $\mc{A}$.
+\end{definition}
+
+\begin{remark}\label{wSat}
+    A set $\Gamma \subset S(A)$ is weakly satisfiable in $\mc{A}$ if and only if $\Gamma$ is satisfiable in some $\mc{B} \succeq \mc{A}$.
+\end{remark}
+\begin{proof}
+\end{proof}
+
+\begin{lemma}[A characterization of rank]\label{gStar}
+    Let $\mc{A}$ and $\mc{B}$ be $\mc{L}$-structures. Let $\varphi \in S^{\alpha}(\mc{A}, \Delta)$. Let $\Gamma$ be the set of all formulas obtained by switching around variables in the formulas of $\{ \phi \} \cup \Delta \cup \Delta^{-}$. There exists $\Gamma^{\ast} \subseteq \Gamma$ weakly satisfiable in $\mc{A}$ such that if $\psi \in S_1(B)$ and $\Gamma^{\dagger}$ is weakly satisfiable in $\mc{B}$, where $\Gamma^{\dagger}$ is obtained from $\Gamma^{\ast}$ by replacing each instance of $\varphi$ by the corresponding instance of $\psi$, then $\psi \in S^{\alpha}(\mc{B}, \Delta)$.
+\end{lemma}
+\begin{proof}
+\end{proof}
+
+\begin{lemma}\label{dFinite}
+    Let $n \in \omega$, let $\Delta$ be finite, and $\varphi$ be an $\mc{L}_X$-formula containing at most one variable $x$ free and possibly names for the elements of the universe of some model. There exists $\Gamma^{*} \subseteq S(X)$ depending only on $n$, $\varphi$, and $\Delta$ such that for any $\mc{A}$, if $\varphi \in S_1(A)$, then $\varphi \in S^n(\mc{A}, \Delta)$ if and only if $\Gamma^{*}$ is weakly satisfied in $\mc{A}$.
+\end{lemma}
+\begin{proof}
+\end{proof}
+
+\begin{lemma}
+    Let $\Delta$ be finite, $n \in \omega$, and let $\varphi \in \Tr^{n}(\mc{A}, \Delta)$ have $\Delta$-degree 1. For each $\psi \in (\Delta \cup \Delta^{-}) \cap S_{k+1}$ there exists $\theta \in S_k(A)$ such that if $\mc{B} \succeq \mc{A}$, then 
+    \[ (\varphi \land \psi)(x, b_1, \ldots, b_k) \in \Tr^{n}(\mc{B}, \Delta) \Leftrightarrow \mc{B} \vDash \theta(b_1, \ldots, b_k), \]
+    where $b_1, \ldots, b_k$ are arbitrary in $B$.
+\end{lemma}
+\begin{proof}
+\end{proof}
+
+\begin{lemma}
+    If $\Delta$ is finite then $\Tr^{\alpha}(\mc{A}, \Delta) = \varnothing$ if $\alpha \geq \omega$.
+\end{lemma}
+\begin{proof}
+\end{proof}
+
+\begin{definition}[$\Delta$-stable]
+\end{definition}
+
+\begin{lemma}
+    Let $\mc{A} \preceq \mc{B}$, let $\varphi$ be a formula in $S_1(A)$ which is $\Delta$-stable, and let $\psi \in \Delta^b(B)$. Then there exists $\theta \in S_1(A)$ such that $\varphi(\mc{A}) \cap \psi(\mc{B}) = \theta(\mc{A})$.
+\end{lemma}
+\begin{proof}
+    No proof but some references listed, including Shelah.
+\end{proof}
+
+\begin{lemma}
+    If $\varphi$ is minimal in $\Tr^{\alpha}(\mc{A}, S)$, then the $S$-degree of $\varphi$ is 1.
+\end{lemma}
+\begin{proof}
+\end{proof}
+
+\begin{lemma}
+    If $\Delta$ is finite and $\varphi$ is minimal in $\Tr^n(\mc{A}, \Delta)$, then the $\Delta$-degree of $\varphi$ in $\mc{A}$ is 1.
+\end{lemma}
+\begin{proof}
+\end{proof}
+
+\begin{theorem}[Model extension]
+    Let $\mc{A}$ and $\mc{B}$ be models of a countable stable theory and suppose that $\mc{A} \prec \mc{B}$ and $P(\mc{A}) = P(\mc{B})$ where $P$ is a unary predicate symbol. There exists $\mc{C} \succ \mc{B}$ such that $P(\mc{C}) = P(\mc{B})$.
+\end{theorem}
+\begin{proof}
+\end{proof}
+
+\end{document}
