@@ -116,7 +116,17 @@
 \begin{proposition}[$\Delta$-rank generalizes Morley rank]\label{dRank}
     Let $p$ be a 1-type in $\Th(\mc{A}, A)$. The Morley rank of $p$ is the least $p$ such that $p \cap \Tr^{\alpha}(\mc{A}, S) \neq \varnothing$. The Morley degree of $p$ is the minimum of the $S$-degrees of the formulas in $p \cap \Tr^{\alpha}(\mc{A}, S)$.
 \end{proposition}
+
 \begin{proof}
+    Let $\mc{B} \succeq \mc{A}$ be an $\aleph_0$-saturated model, so $p$ is realized in $\mc{B}$. To prove the first part, we show by induction on $\alpha$ that for all $\varphi \in p$,
+    \[ \RM(\varphi) = \RM^{\mc{B}}(\varphi) \geq \alpha \Leftrightarrow \varphi \in S^{\alpha}(\mc{A}, S). \]
+    If $\alpha = 0$, we clearly have by definition that $\mc{A} \vDash \exists x \varphi(x)$ if and only if $\varphi(\mc{A})$ is nonempty. The limit case follows easily by induction.
+
+    As for the successor case, we need to show that $\RM(\varphi) \geq \alpha + 1$ if and only if $\phi$ is in $S^{\alpha}(\mc{A}, S) \setminus \Tr^{\alpha}(\mc{A}, S)$. First suppose that $\RM(\varphi) \geq \alpha + 1$, so there exist infinitely many $\mc{L}_B$-formulas $\psi_1, \psi_2, \ldots$ defining pairwise disjoint subsets of $\varphi(\mc{B})$ such that $\RM(\psi_i) \geq \alpha$ for all $i < \omega$. Let $k$ be any finite number. Then, define the following finite set of formulas $\Gamma \subset S^b(B)$.
+    \[ \Gamma = \left\{ \psi_1, \ldots, \psi_{k+1}, \left( \varphi \land \bigwedge_{i=1}^{k+1} \neg \psi_i \right) \right\} \]
+    This set clearly partitions $\varphi$. We can see that for at least $k+1$ formulas $\psi_i \in \Gamma$, $\psi_i \land \varphi = \psi_i$ has rank $\alpha$, which by induction means $\psi_i \in S^{\alpha}(\mc{B}, S)$. Thus, we conclude that $\varphi$ cannot be in $\Tr^{\alpha}(\mc{A}, S)$.
+
+    Now suppose that $\RM(\varphi) = \alpha$. Then, we can see that the Morley degree of $\varphi$ as an $\mc{L}_B$-formula is a $k$ witnessing that $\varphi \in \Tr^{\alpha}(\mc{A}, S)$. In fact, by the definition of the Morley degree of a type, the second part of the proposition is trivial.
 \end{proof}
 
 \begin{definition}[Minimality]
@@ -132,6 +142,16 @@
     \end{enumerate}
 \end{lemma}
 \begin{proof}
+    (i) Clearly $\varphi \in S^0(\mc{A}, \Delta)$ implies that $\psi(\mc{A}) \supseteq \varphi(\mc{A}) \neq \varnothing$, so $\psi \in S^0(\mc{A}, \Delta)$. For the successor case, given a set which partitions $\varphi$ with $k$ formulas in $S^{\alpha}(\mc{A}, \Delta)$, we easily also have a set which partitions $\psi$ with $k$ formulas in $S^{\alpha}(\mc{A}, \Delta)$. Thus, if $\varphi \notin \Tr^{\alpha}(\mc{A}, \Delta)$, then $\psi \notin \Tr^{\alpha}(\mc{A}, \Delta)$. The limit case follows easily from induction.
+
+    (ii) Since $\mc{A} \vDash \exists x \varphi(x)$ if and only if $\mc{B} \vDash \exists x \varphi(x)$, we immediately have the case of $\alpha = 0$. In fact, since the property of a set partitioning a formula depends only on the satisfaction of finitely many sentences, a set partitioning $\varphi$ in $\mc{A}$ with $k$ formulas in $S^{\alpha}(\mc{A}, \Delta)$ will also be a set partitioning $\varphi$ in $\mc{B}$ with $k$ formulas in $S^{\alpha}(\mc{B}, \Delta)$ and vice versa by induction. The limit case also follows easily.
+    
+    (iii) We have the following deduction to show that this holds for the case of $\alpha = 0$.
+    \[ \mc{A} \vDash \exists x \varphi (x) \Rightarrow \mc{A} \vDash \exists x (\varphi_0 (x) \lor \varphi_1(x)) \Rightarrow \mc{A} \vDash \exists x \varphi_0(x) \lor \exists x \varphi_1(x) \]
+    
+    Suppose the lemma holds for $\alpha$, suppose $\varphi \in S^{\alpha+1}(\mc{A}, \Delta)$, and let $k \in \omega$. There exists a set $\Gamma$ which partitions $\varphi$ with formulas $\psi_1, \ldots, \psi_{2k} \in \Gamma$ such that each $\psi_i$ is in $S^{\alpha}(\mc{A}, \Delta)$. For each $\psi_i$, at least one of $(\psi_i \land \varphi_0)$ and $(\psi_i \land \varphi_1)$ is in $S^{\alpha}(\mc{A}, \Delta)$ by induction. Since we have $2k$ formulas, for at least one of the $\varphi_j$'s there are at least $k$ formulas of the form $(\psi_i \land \varphi_j)$ in $S^{\alpha}(\mc{A}, \Delta)$. Then we can easily construct a partitioning set showing that $\varphi_j$ cannot have degree $k$. We are able to show that for any $k \in \omega$ one of $\varphi_0$ and $\varphi_1$ is unable to have degree $k$. Thus, for one of the $\varphi_j$'s, $\varphi_j$ fails to have degree $k$ for infinitely many $k$, meaning $\varphi_j \in S^{\alpha+1}(\mc{A}, \Delta)$. 
+    
+    Finally, for the limit case, assuming the lemma holds for all $\beta < \alpha$, it is true for at least one of the $\varphi_j$'s that there is a cofinal sequence of ordinals in $\alpha$ where for each entry $\beta$, $\varphi_j \in S^{\beta}(\mc{A}, \Delta)$. Thus, $\varphi_j \in S^{\alpha}(\mc{A}, \Delta)$.
 \end{proof}
 
 \begin{definition}[Weak satisfiability]
@@ -144,18 +164,51 @@
     A set $\Gamma \subset S(A)$ is weakly satisfiable in $\mc{A}$ if and only if $\Gamma$ is satisfiable in some $\mc{B} \succeq \mc{A}$.
 \end{remark}
 \begin{proof}
+    For the rightward direction, $\Gamma \cup \Diagel(\mc{A})$ is finitely satisfiable and therefore satisfiable. For the leftward direction, if $\Gamma \cup \Diagel(\mc{A})$ were not satisfiable, then there would exist formulas $\psi_1, \ldots, \psi_n \in \Gamma^{-}$ such that $\Diagel(\mc{A}) \vDash \forall \overline{x} (\psi_1 \lor \cdots \lor \psi_n)$, so $\Gamma$ would not be weakly satisfiable in $\mc{A}$.
 \end{proof}
 
 \begin{lemma}[A characterization of rank]\label{gStar}
     Let $\mc{A}$ and $\mc{B}$ be $\mc{L}$-structures. Let $\varphi \in S^{\alpha}(\mc{A}, \Delta)$. Let $\Gamma$ be the set of all formulas obtained by switching around variables in the formulas of $\{ \phi \} \cup \Delta \cup \Delta^{-}$. There exists $\Gamma^{\ast} \subseteq \Gamma$ weakly satisfiable in $\mc{A}$ such that if $\psi \in S_1(B)$ and $\Gamma^{\dagger}$ is weakly satisfiable in $\mc{B}$, where $\Gamma^{\dagger}$ is obtained from $\Gamma^{\ast}$ by replacing each instance of $\varphi$ by the corresponding instance of $\psi$, then $\psi \in S^{\alpha}(\mc{B}, \Delta)$.
 \end{lemma}
 \begin{proof}
+    We proceed by induction on $\alpha$. For $\alpha = 0$, the set $\Gamma^{\prime} = \{ \varphi \}$ works, as well as its obvious counterpart $\Gamma^{\dagger} = \{ \psi \}$. 
+    
+    If $\alpha$ is a limit ordinal, suppose the lemma holds for all $\beta < \alpha$. Then, for each $\beta$, there exists some $\Gamma_{\beta}^{\ast} \subseteq \Gamma$ weakly satisfiable in $\mc{A}$ such that the corresponding set $\Gamma_{\beta}^{\dagger}$ has the desired property of the lemma. We may change the variables in each $\Gamma_{\beta}$ such that if $\beta, \gamma < \alpha$ and $\beta \neq \gamma$, then $\Gamma_{\beta}$ and $\Gamma_{\gamma}$ have no variables in common. Then, let $\Gamma^{\ast} = \bigcup_{\beta < \alpha} \Gamma_{\beta}^{\ast}$, so $\Gamma^{\dagger} = \bigcup_{\beta < \alpha} \Gamma_{\beta}^{\dagger}$. Clearly, $\Gamma^{\ast}$ is weakly satisfiable in $\mc{A}$. If $\Gamma^{\dagger}$ is weakly satisfiable in $\mc{B}$, then each $\Gamma_{\beta}^{\dagger}$ is weakly satisfiable. By induction, that means $\psi \in S^{\beta}(\mc{B}, \Delta)$ for all $\beta < \alpha$ and so $\psi \in S^{\alpha}(\mc{B}, \Delta)$.
+
+    Now suppose that $\alpha$ is a successor with $\alpha = \beta + 1$. We will want to construct a nice sequence of formulas in order to construct $\Gamma^{\ast}$.
+    \begin{claim}
+    There exists $\mc{A}^{\prime} \succeq \mc{A}$ and a sequence $\langle \varphi_n : n \in \omega \rangle$ of formulas in $\Delta^b(A^{\prime})$ such that, for all $m, n \in \omega$,
+    \begin{itemize}
+        \item $(\varphi \land \varphi_n) \in S^{\beta}(\mc{A}^{\prime}, \Delta)$,
+        \item $\neg(\varphi_m \land \varphi_n)$ is a tautology, i.e. valid in every structure, if $m \neq n$, and 
+        \item $\varphi_n$ is a conjunction of $\mc{A}^{\prime}$-instances of formulas in $\Delta \cup \Delta^{-}$.
+    \end{itemize}
+    \end{claim}
+    First, since $\varphi \in S^{\alpha}(\mc{A}, \Delta)$, there exists $\mc{A}_0 \succeq \mc{A}$ and mutually exclusive $\theta_0, \theta_1 \in \Delta^b(A_0)$ such that $(\varphi \land \theta_0), (\varphi \land \theta_1) \in S^{\beta}(\mc{A}_0, \Delta)$. By \autoref{pRank}(iii), we can let $\theta$ be one of $\theta_0$, $\theta_1$, and $(\neg\theta_0 \land \neg\theta_1)$ such that $(\varphi \land \theta) \in S^{\alpha}(\mc{A}_0, \Delta)$. If $\theta = \theta_0$, let $\varphi_0^{\ast} = \theta_1$. Otherwise, let $\varphi_0^{\ast} = \theta_0$. By repeated use of \autoref{pRank}(iii) and laws of Boolean algebra, we can find $\varphi_0$, a conjunction of $\mc{A}_0$-instances of formulas in $\Delta \cup \Delta^{-}$ such that $\varphi_0(\mc{A}_0) \subseteq \varphi_0^{\ast}(\mc{A}_0)$ and $\varphi \in S^{\beta}(\mc{A}_0, \Delta)$.
+
+    Since $\theta \in S^{\alpha}(\mc{A}, \Delta)$, we can repeat this process on $\theta$ instead of $\varphi$ and, indeed, continue it indefinitely. This gives us a sequence of formulas $\langle \varphi_n : n \in \omega \rangle$ and an increasing chain of models
+    \[ \mc{A} \preceq \mc{A}_0 \preceq \mc{A}_1 \preceq \cdots \]
+    where, for all $n$, $\varphi_n$ is a conjunction of $\mc{A}_n$-instances of formulas in $\Delta \cup \Delta^{-}$. Finally, let $\mc{A}^{\prime} = \bigcup_{n \in \omega} \mc{A}_n$. Then, for all $n$, $(\varphi \land \varphi_n) \in S^{\beta}(\mc{A}^{\prime}, \Delta)$ by \autoref{pRank}(ii). The sequence also satisfies the other two desired properties, meaning we have proven the claim.
+
+    \begin{mdframed}
+
+        There is an issue with this proof: I have shown that these formulas are mutually exclusive in $\mc{A}^{\prime}$, but this is a weaker notion than the second part of the claim. To salvage this: make it so $\varphi_{n+1}$ has the negation of a formula $\delta_m \in \Delta \cup \Delta^{-}$ for all $m \leq n$, where $\delta_m$ appears in $\varphi_m$ but not $\varphi_{m-1}$.
+    \end{mdframed}
+
+    For each $n$, let $\Gamma_n$ be the set of all formulas obtained by switching around variables in the formulas of $\{ (\varphi \land \varphi_n) \} \cup \Delta \cup \Delta^{-}$. Since we have assumed the lemma for $\beta$, there exists $\Gamma_n^{\prime} \subseteq \Gamma_n$ weakly satisfiable in $\mc{A}^{\prime}$ with our desired property. We can also assume that $\Gamma_m$ and $\Gamma_n$ share no variables if $m \neq n$ and that there are infinitely many variables not occurring in any $\Gamma_n$.
+
+    For each $c_a \in \mc{L}_A$ which occurs in one of our formulas $\varphi_n$ we can set aside a variable $x_a$; this variable is independent of $n$. Let $\Gamma_n^{\ast}$ be obtained from $\Gamma_n$ by replacing each occurrence of $c_a$ with a corresponding variable $x_a$. Let $\Gamma^{\ast} = \bigcup_{n \in \omega} \Gamma_n^{\ast}$. We can see that $\Gamma^{\ast}$ is weakly satisfiable in $\mc{A}$. Now, let $\Gamma^{\dagger}$ be the set obtained from $\Gamma^{\ast}$ by replacing each instance of $\varphi$ with $\psi$.
+    
+    Suppose $\Gamma^{\dagger}$ is weakly satisfiable in $\mc{B}$. Then, by \autoref{wSat}, there exists $\mc{B}^{\prime} \succeq \mc{B}$ where $\Gamma^{\dagger}$ is satisfied. By replacing each variable $v_a$ with a constant symbol in $\mc{L}_{B^{\prime}}$ appropriately, we have a sequence of formulas $\langle \psi_n : n \in \omega \rangle$ corresponding to each $\varphi_n$. This gives us infinitely many disjoint formulas $(\psi \land \psi_n) \in S^{\beta}(\mc{B}^{\prime}, \Delta)$, witnessing that $\psi \in S^{\alpha}(\mc{B}^{\prime}, \Delta)$. By \autoref{pRank}(ii), $\psi \in S^{\alpha}(\mc{B}, \Delta)$.
 \end{proof}
 
 \begin{lemma}\label{dFinite}
-    Let $n \in \omega$, let $\Delta$ be finite, and $\varphi$ be an $\mc{L}_X$-formula containing at most one variable $x$ free and possibly names for the elements of the universe of some model. There exists $\Gamma^{*} \subseteq S(X)$ depending only on $n$, $\varphi$, and $\Delta$ such that for any $\mc{A}$, if $\varphi \in S_1(A)$, then $\varphi \in S^n(\mc{A}, \Delta)$ if and only if $\Gamma^{*}$ is weakly satisfied in $\mc{A}$.
+    Let $\Gamma$ be defined as in \autoref{gStar}. Let $n \in \omega$, let $\Delta$ be finite, and $\varphi$ be an $\mc{L}_X$-formula containing at most one variable $x$ free and possibly names for the elements of the universe of some model. There exists $\Gamma^{*} \subseteq S(X)$ depending only on $n$, $\varphi$, and $\Delta$ such that for any $\mc{A}$, if $\varphi \in S_1(A)$, then $\varphi \in S^n(\mc{A}, \Delta)$ if and only if $\Gamma^{*}$ is weakly satisfied in $\mc{A}$.
 \end{lemma}
 \begin{proof}
+    We proceed by induction on $n$. For $n = 0$, $\Gamma^{\ast} = \{ \varphi(x) \}$ clearly works. Now assume that the result is true for $n = m$ where $m \geq 0$.
+
+    For $\psi \in S^{m+1}(\mc{B}, \Delta)$, let $\Theta(\mc{B})$ be the set of all formulas $\theta \in \Delta \cup \Delta^{-}$ such that $(\psi \land \theta^{\prime}) \in S^{m+1}(\mc{B}^{\prime}, \Delta)$ and $(\psi \land \neg\theta^{\prime}) \in S^m(\mc{B}^{\prime}, \Delta)$ for some $\mc{B}^{\prime} \succeq \mc{B}$ and some $\mc{B}^{\prime}$-instance $\theta^{\prime}$ of $\theta$. Given $\varphi \in S^{m+1}(\mc{B}, \Delta)$, choose $\mc{B} \succeq \mc{A}$ and $\psi \in S^{m+1}(\mc{B}, \Delta)$ such that 
 \end{proof}
 
 \begin{lemma}
@@ -164,15 +217,18 @@
     where $b_1, \ldots, b_k$ are arbitrary in $B$.
 \end{lemma}
 \begin{proof}
+    Short proof, looks terse.
 \end{proof}
 
 \begin{lemma}
     If $\Delta$ is finite then $\Tr^{\alpha}(\mc{A}, \Delta) = \varnothing$ if $\alpha \geq \omega$.
 \end{lemma}
 \begin{proof}
+    No proof but explains some analogous results.
 \end{proof}
 
 \begin{definition}[$\Delta$-stable]
+    To be added. Generalization of stability (duh).
 \end{definition}
 
 \begin{lemma}
@@ -186,18 +242,22 @@
     If $\varphi$ is minimal in $\Tr^{\alpha}(\mc{A}, S)$, then the $S$-degree of $\varphi$ is 1.
 \end{lemma}
 \begin{proof}
+    Long, seemingly full proof given.
 \end{proof}
+That last lemma says that all transcendental points in the Stone space of a model have degree 1.
 
 \begin{lemma}
     If $\Delta$ is finite and $\varphi$ is minimal in $\Tr^n(\mc{A}, \Delta)$, then the $\Delta$-degree of $\varphi$ in $\mc{A}$ is 1.
 \end{lemma}
 \begin{proof}
+    Lachlan's experimental notation really shines here.
 \end{proof}
 
 \begin{theorem}[Model extension]
     Let $\mc{A}$ and $\mc{B}$ be models of a countable stable theory and suppose that $\mc{A} \prec \mc{B}$ and $P(\mc{A}) = P(\mc{B})$ where $P$ is a unary predicate symbol. There exists $\mc{C} \succ \mc{B}$ such that $P(\mc{C}) = P(\mc{B})$.
 \end{theorem}
 \begin{proof}
+    Long! Uses a theorem of Ehrenfeucht. Check Reference 8.
 \end{proof}
 
 \end{document}

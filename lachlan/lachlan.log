@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.14)  26 JUN 2025 14:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.14)  26 JUN 2025 15:25
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -561,15 +561,28 @@ Package hyperref Info: bookmark level for unknown definition defaults to 0 on in
 
 ]
 Package hyperref Info: bookmark level for unknown proposition defaults to 0 on input line 116.
-Package hyperref Info: bookmark level for unknown lemma defaults to 0 on input line 126.
-Package hyperref Info: bookmark level for unknown remark defaults to 0 on input line 143.
+Package hyperref Info: bookmark level for unknown lemma defaults to 0 on input line 136.
 
 
 [2]
-Package hyperref Info: bookmark level for unknown theorem defaults to 0 on input line 197.
+Package hyperref Info: bookmark level for unknown remark defaults to 0 on input line 163.
 
 
-[3] (./lachlan.aux)
+[3]
+Package hyperref Info: bookmark level for unknown claim defaults to 0 on input line 180.
+
+
+[4]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 194.
+
+
+[5]
+Package hyperref Info: bookmark level for unknown theorem defaults to 0 on input line 256.
+
+
+[6] (./lachlan.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -578,18 +591,18 @@ Package rerunfilecheck Info: File `lachlan.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 12978 strings out of 473190
- 206725 string characters out of 5719979
+ 12991 strings out of 473190
+ 206931 string characters out of 5719979
  640140 words of memory out of 5000000
- 35969 multiletter control sequences out of 15000+600000
- 574351 words of font info for 82 fonts, out of 8000000 for 9000
+ 35975 multiletter control sequences out of 15000+600000
+ 575524 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 79i,11n,93p,691b,716s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 79i,12n,93p,1050b,755s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on lachlan.pdf (3 pages, 121127 bytes).
+Output written on lachlan.pdf (6 pages, 140039 bytes).
 PDF statistics:
- 126 PDF objects out of 1000 (max. 8388607)
- 98 compressed objects within 1 object stream
- 43 named destinations out of 1000 (max. 500000)
+ 146 PDF objects out of 1000 (max. 8388607)
+ 114 compressed objects within 2 object streams
+ 47 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
