@@ -25,11 +25,13 @@
 \newcommand\Z{\mathbb{Z}}
 \newcommand\Q{\mathbb{Q}}
 \newcommand\R{\mathbb{R}}
+\newcommand\monster{\mathbb{M}}
 \DeclareMathOperator{\Diag}{Diag}
 \DeclareMathOperator{\Diagel}{Diag_{el}}
 \DeclareMathOperator{\Th}{Th}
 \DeclareMathOperator{\Tr}{Tr}
 \DeclareMathOperator{\RM}{RM}
+\DeclareMathOperator{\rank}{rank}
 \let\mc\mathcal
 
 % Basic environments for theorems et al.
@@ -70,7 +72,7 @@
 
 \chead{\textbf{Michael Fiore, \'Alvaro Ramos}}
 
-\begin{notation}[Preliminaries] Let $\mc{L}$ be a countable language. We will also let $\mc{A}$ and $\mc{B}$ denote $\mc{L}$-structures with universes $A$ and $B$ respectively.
+\begin{notation}[Preliminaries] Let $\mc{L}$ be a countable language and let $T$ be a stable theory in $\mc{L}$ which permits infinite models. We will also let $\mc{A}$ and $\mc{B}$ denote $\mc{L}$-structures with universes $A$ and $B$ respectively. When relevant, let $\mc{A} \vDash T$. We will also be using the monster model $\monster \succeq \mc{A}$ for many of the following results.
     \begin{itemize}
         \item Let $S$ be the set of all $\mc{L}$-formulas. Throughout this write-up, we will let $\Delta$ be a set of $\mc{L}$-formulas, so $\Delta \subseteq S$.
         \item Let $S_n$ be the set of all $\mc{L}$-formulas with at most one free variable $x$.
@@ -107,9 +109,9 @@
 
         \item For $\alpha$ limit, let $S^{\alpha}(\mc{A}, \Delta) = \bigcap_{\beta < \alpha} S^{\beta}(\mc{A}, \Delta)$.
 
-        \item The \textit{$\Delta$-rank} of $\varphi$ in $\mc{A}$ is the least ordinal $\alpha$ such that $\varphi \in \Tr^{\alpha}(\mc{A}, \Delta)$.
+        \item The \textit{$\Delta$-rank} of $\varphi$ in $\mc{A}$ is the least (and unique) ordinal $\alpha$ such that $\varphi \in \Tr^{\alpha}(\mc{A}, \Delta)$. When $\Delta$ is unambiguous, we denote this as $\rank_{\mc{A}}(\varphi)$.
         
-        \item The \textit{$\Delta$-degree} of $\varphi$ in $\mc{A}$ is the least number $k$ witnessing that $\varphi \in \Tr^{\alpha}(\mc{A}, \Delta)$.
+        \item The \textit{$\Delta$-degree} of $\varphi$ in $\mc{A}$ is the least number $k$ witnessing that $\varphi \in \Tr^{\alpha}(\mc{A}, \Delta)$. When $\Delta$ is unambiguous, we denote this as $\deg_{\mc{A}}(\varphi)$.
     \end{itemize}
 \end{definition}
 
@@ -136,13 +138,13 @@
 \begin{lemma}[Properties of rank]\label{pRank}
     Let $\varphi$, $\varphi_0$, $\varphi_1$, and $\psi$ be formulas in $S_1(A)$.
     \begin{enumerate}
-        \item If $\varphi(\mc{A}) \subseteq \psi(\mc{A})$ and $\varphi \in S^{\alpha}(\mc{A}, \Delta)$, then $\psi \in S^{\alpha}(\mc{A}, \Delta)$.
-        \item Suppose $\mc{B} \succeq \mc{A}$. Then $\varphi \in S^{\alpha}(\mc{A}, \Delta)$ if and only if $\varphi \in S^{\alpha}(\mc{B}, \Delta)$.
-        \item If $(\varphi_0 \lor \varphi_1)(\mc{A}) \supseteq \varphi(\mc{A})$ and $\varphi \in S^{\alpha}(\mc{A}, \Delta)$, then one of $\varphi_0$ and $\varphi_1$ is in $S^{\alpha}(\mc{A}, \Delta)$.
+        \item Suppose $\varphi(\mc{A}) \subseteq \psi(\mc{A})$. Then $\rank_{\mc{A}}(\varphi) \leq \rank_{\mc{A}}(\psi)$ and, if $\rank_{\mc{A}}(\varphi) = \rank_{\mc{A}}(\psi)$, then $\deg_{\mc{A}}(\varphi) \leq \deg_{\mc{A}}(\psi)$.
+        \item If $\mc{B} \succeq \mc{A}$, then $\rank_{\mc{A}}(\varphi) = \rank_{\mc{B}}(\varphi)$.
+        \item If $(\varphi_0 \lor \varphi_1)(\mc{A}) \supseteq \varphi(\mc{A})$ and $\rank_{\mc{A}}(\varphi) \geq \alpha$, then at least one of $\varphi_0$ and $\varphi_1$ has a $\Delta$-rank of at least $\alpha$. In particular, if $\rank_{\mc{A}}(\varphi) = \alpha$ for any ordinal $\alpha$, then $\deg_{\mc{A}}(\varphi) \geq 1$.
     \end{enumerate}
 \end{lemma}
 \begin{proof}
-    (i) Clearly $\varphi \in S^0(\mc{A}, \Delta)$ implies that $\psi(\mc{A}) \supseteq \varphi(\mc{A}) \neq \varnothing$, so $\psi \in S^0(\mc{A}, \Delta)$. For the successor case, given a set which partitions $\varphi$ with $k$ formulas in $S^{\alpha}(\mc{A}, \Delta)$, we easily also have a set which partitions $\psi$ with $k$ formulas in $S^{\alpha}(\mc{A}, \Delta)$. Thus, if $\varphi \notin \Tr^{\alpha}(\mc{A}, \Delta)$, then $\psi \notin \Tr^{\alpha}(\mc{A}, \Delta)$. The limit case follows easily from induction.
+    (i) Clearly $\varphi \in S^0(\mc{A}, \Delta)$ implies that $\psi(\mc{A}) \supseteq \varphi(\mc{A}) \neq \varnothing$, so $\psi \in S^0(\mc{A}, \Delta)$. For the successor case, given a set which partitions $\varphi$ with $k$ formulas in $S^{\alpha}(\mc{A}, \Delta)$, we easily also have a set which partitions $\psi$ with $k$ formulas in $S^{\alpha}(\mc{A}, \Delta)$. Thus, if $\varphi \notin \Tr^{\alpha}(\mc{A}, \Delta)$, then $\psi \notin \Tr^{\alpha}(\mc{A}, \Delta)$. The limit case follows easily from induction. Also, if $k$ formulas of rank $\alpha$ partition $\varphi$, then these same formulas partition $\psi$, giving the second part of the statement easily.
 
     (ii) Since $\mc{A} \vDash \exists x \varphi(x)$ if and only if $\mc{B} \vDash \exists x \varphi(x)$, we immediately have the case of $\alpha = 0$. In fact, since the property of a set partitioning a formula depends only on the satisfaction of finitely many sentences, a set partitioning $\varphi$ in $\mc{A}$ with $k$ formulas in $S^{\alpha}(\mc{A}, \Delta)$ will also be a set partitioning $\varphi$ in $\mc{B}$ with $k$ formulas in $S^{\alpha}(\mc{B}, \Delta)$ and vice versa by induction. The limit case also follows easily.
     
@@ -167,8 +169,8 @@
     For the rightward direction, $\Gamma \cup \Diagel(\mc{A})$ is finitely satisfiable and therefore satisfiable. For the leftward direction, if $\Gamma \cup \Diagel(\mc{A})$ were not satisfiable, then there would exist formulas $\psi_1, \ldots, \psi_n \in \Gamma^{-}$ such that $\Diagel(\mc{A}) \vDash \forall \overline{x} (\psi_1 \lor \cdots \lor \psi_n)$, so $\Gamma$ would not be weakly satisfiable in $\mc{A}$.
 \end{proof}
 
-\begin{lemma}[A characterization of rank]\label{gStar}
-    Let $\mc{A}$ and $\mc{B}$ be $\mc{L}$-structures. Let $\varphi \in S^{\alpha}(\mc{A}, \Delta)$. Let $\Gamma$ be the set of all formulas obtained by switching around variables in the formulas of $\{ \phi \} \cup \Delta \cup \Delta^{-}$. There exists $\Gamma^{\ast} \subseteq \Gamma$ weakly satisfiable in $\mc{A}$ such that if $\psi \in S_1(B)$ and $\Gamma^{\dagger}$ is weakly satisfiable in $\mc{B}$, where $\Gamma^{\dagger}$ is obtained from $\Gamma^{\ast}$ by replacing each instance of $\varphi$ by the corresponding instance of $\psi$, then $\psi \in S^{\alpha}(\mc{B}, \Delta)$.
+ \begin{lemma}[A characterization of rank]\label{gStar}
+     Let $\mc{A}$ and $\mc{B}$ be $\mc{L}$-structures. Let $\varphi \in S^{\alpha}(\mc{A}, \Delta)$. Let $\Gamma$ be the set of all formulas obtained by switching around variables in the formulas of $\{ \phi \} \cup \Delta \cup \Delta^{-}$. There exists $\Gamma^{\ast} \subseteq \Gamma$ weakly satisfiable in $\mc{A}$ such that if $\psi \in S_1(B)$ and $\Gamma^{\dagger}$ is weakly satisfiable in $\mc{B}$, where $\Gamma^{\dagger}$ is obtained from $\Gamma^{\ast}$ by replacing each instance of $\varphi$ by the corresponding instance of $\psi$, then $\psi \in S^{\alpha}(\mc{B}, \Delta)$.
 \end{lemma}
 \begin{proof}
     We proceed by induction on $\alpha$. For $\alpha = 0$, the set $\Gamma^{\prime} = \{ \varphi \}$ works, as well as its obvious counterpart $\Gamma^{\dagger} = \{ \psi \}$. 
@@ -202,22 +204,29 @@
     Suppose $\Gamma^{\dagger}$ is weakly satisfiable in $\mc{B}$. Then, by \autoref{wSat}, there exists $\mc{B}^{\prime} \succeq \mc{B}$ where $\Gamma^{\dagger}$ is satisfied. By replacing each variable $v_a$ with a constant symbol in $\mc{L}_{B^{\prime}}$ appropriately, we have a sequence of formulas $\langle \psi_n : n \in \omega \rangle$ corresponding to each $\varphi_n$. This gives us infinitely many disjoint formulas $(\psi \land \psi_n) \in S^{\beta}(\mc{B}^{\prime}, \Delta)$, witnessing that $\psi \in S^{\alpha}(\mc{B}^{\prime}, \Delta)$. By \autoref{pRank}(ii), $\psi \in S^{\alpha}(\mc{B}, \Delta)$.
 \end{proof}
 
-\begin{lemma}\label{dFinite}
-    Let $\Gamma$ be defined as in \autoref{gStar}. Let $n \in \omega$, let $\Delta$ be finite, and $\varphi$ be an $\mc{L}_X$-formula containing at most one variable $x$ free and possibly names for the elements of the universe of some model. There exists $\Gamma^{*} \subseteq S(X)$ depending only on $n$, $\varphi$, and $\Delta$ such that for any $\mc{A}$, if $\varphi \in S_1(A)$, then $\varphi \in S^n(\mc{A}, \Delta)$ if and only if $\Gamma^{*}$ is weakly satisfied in $\mc{A}$.
-\end{lemma}
-\begin{proof}
-    We proceed by induction on $n$. For $n = 0$, $\Gamma^{\ast} = \{ \varphi(x) \}$ clearly works. Now assume that the result is true for $n = m$ where $m \geq 0$.
-
-    For $\psi \in S^{m+1}(\mc{B}, \Delta)$, let $\Theta(\mc{B})$ be the set of all formulas $\theta \in \Delta \cup \Delta^{-}$ such that $(\psi \land \theta^{\prime}) \in S^{m+1}(\mc{B}^{\prime}, \Delta)$ and $(\psi \land \neg\theta^{\prime}) \in S^m(\mc{B}^{\prime}, \Delta)$ for some $\mc{B}^{\prime} \succeq \mc{B}$ and some $\mc{B}^{\prime}$-instance $\theta^{\prime}$ of $\theta$. Given $\varphi \in S^{m+1}(\mc{B}, \Delta)$, choose $\mc{B} \succeq \mc{A}$ and $\psi \in S^{m+1}(\mc{B}, \Delta)$ such that 
-\end{proof}
-
 \begin{lemma}
-    Let $\Delta$ be finite, $n \in \omega$, and let $\varphi \in \Tr^{n}(\mc{A}, \Delta)$ have $\Delta$-degree 1. For each $\psi \in (\Delta \cup \Delta^{-}) \cap S_{k+1}$ there exists $\theta \in S_k(A)$ such that if $\mc{B} \succeq \mc{A}$, then 
-    \[ (\varphi \land \psi)(x, b_1, \ldots, b_k) \in \Tr^{n}(\mc{B}, \Delta) \Leftrightarrow \mc{B} \vDash \theta(b_1, \ldots, b_k), \]
-    where $b_1, \ldots, b_k$ are arbitrary in $B$.
+    Let $\Delta$ be finite, $n \in \omega$, and let $\psi$ have $\Delta$-rank $n$ and $\Delta$-degree 1. For each $\varphi \in (\Delta \cup \Delta^{-}) \cap S_{k+1}$ and for any $\mc{B} \succeq \mc{A}$, the set
+    \[ D = \{ \overline{b} \in \mc{B}^{k} : \rank_{\mc{B}}(\psi(x) \land \varphi(x, \overline{b})) = n \} \]
+    is definable over $A$.
 \end{lemma}
 \begin{proof}
-    Short proof, looks terse.
+    We may first suppose that $\mc{B}$ is the monster model $\monster$. We assume that each $\varphi \in \Delta$ is stable since the theory $T$ is stable. Letting $\varphi$ be any formula in $\Delta$ or $\Delta^{-}$ with $k+1$ free variables, we define the following global $\varphi$-type.
+    \[ p = \{ \varphi(x, \overline{b}) : \overline{b} \in D \} \cup \{ \neg\varphi(x, \overline{c}) : \overline{c} \in \monster^{k} \setminus D \} \]
+    First, we show that this type is consistent, i.e. that $\Diagel(\mc{A}) \cup p$ is satisfiable. Let $p_0 \subset p$ be finite; we'll write this partial $\varphi$-type as
+    \[ \left\{ \varphi(x, \overline{b}_1), \ldots, \varphi(x, \overline{b}_r), \neg\varphi(x, \overline{c}_1), \ldots, \neg\varphi(x, \overline{c}_s) \right\} \]
+    where $\overline{b}_1, \ldots, \overline{b}_r \in D$ and $\overline{c}_1, \ldots, \overline{c}_s \in \monster^{k} \setminus D$. We will show that
+    \[ \theta_{i}(x) = \psi(x) \land \varphi(x, \overline{b}_1) \land \cdots \land \varphi(x, \overline{b}_i) \]
+    has $\Delta$-rank $n$ for every $i \in \{ 1, \ldots, r \}$. It will follow, since $n \geq 0$, that this formula has a witness. First, we have that $\rank(\psi(x) \land \varphi(x, \overline{b}_1)) = n$ by definition. Now, let $i \geq 2$ and suppose $\rank(\theta_{i-1}(x)) = n$. We know that $\deg(\theta_{i-1}(x)) = 1$ by \autoref{pRank}(i) and (iii). Thus, if $\rank(\theta_{i-1}(x) \land \varphi(x, \overline{b}_i)) < n$, then it must be the case that $\rank(\theta_{i-1}(x) \land \neg\varphi(x, \overline{b}_i)) = n$. However, by \autoref{pRank}(i), this means that $\rank(\psi(x) \land \neg\varphi(x, \overline{b}_i)) = n$, contradicting that $\psi$ has $\Delta$-degree 1. So, it can only be the case that $\rank(\theta_{i}(x)) = n$. This along with analogous logic for each $\neg\varphi(x, \overline{c}_i)$ shows that
+    \[ \rank_{\monster}\left( \psi(x) \land \bigwedge \varphi(x, \overline{b}_i) \land \bigwedge \neg\varphi(x, \overline{c}_i) \right) = n \]
+    In particular, since $n \geq 0$, the formula has a witness in $\monster$, meaning that $p_0$ is satisfiable and so $p$ is realized in $\monster$.
+
+    Since $\varphi$ is stable, the $\varphi$-type $p$ is definable by some formula $\theta(\overline{y})$ with parameters in the monster. This formula also defines $D$. To finish our proof, we only need to show that $D$ is $A$-invariant. Let $\sigma$ be any automorphism on $\monster$ which fixes $A$ pointwise. We must show that for any $\overline{b} \in D$, $\sigma(\overline{b}) \in D$. Since the only names in $\psi$ are names of elements of $A$ and the only names in $\varphi(x, \overline{b})$ are $\overline{b}$, we obtain the following.
+    \begin{align*}
+        \rank(\sigma(\psi(x) \land \varphi(x, \overline{b}))) &=
+        \rank(\sigma(\psi(x)) \land \sigma(\varphi(x, \overline{b}))) \\ &=
+        \rank(\psi(x) \land \varphi(x, \sigma(\overline{b}))) = n
+    \end{align*}
+    Thus, $\sigma(\overline{b}) \in D$, meaning $D$ is $A$-invariant. Thus, $D$ is $A$-definable. Since we are working in the monster model, whatever formula defines $D$ in $\monster$ will also define any $\mc{B}$ extending $\mc{A}$, completing our proof.
 \end{proof}
 
 \begin{lemma}
